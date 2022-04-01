@@ -1,17 +1,17 @@
-import type { PropPurgers, Purger } from "../types";
+import type { PropCasts, Cast } from "../types";
 import { dev } from "../env";
-import { array as purgeArray, object as purgeObject } from "./object";
+import { array as castArray, object as castObject } from "./object";
 import { castCast, intercept, warn } from "../utils";
 
 export const arrayOf = dev
-  ? <T>(purger: Purger<T>): Purger<T[]> =>
+  ? <T>(cast: Cast<T>): Cast<T[]> =>
       (val: unknown, path: string = "") => {
         const cbRes = intercept((anyWarnings) => {
-          const array = purgeArray(val, path);
+          const array = castArray(val, path);
 
           if (!anyWarnings()) {
             array.forEach((v, i) => {
-              purger(v, `${path}[${i}]`);
+              cast(v, `${path}[${i}]`);
             });
           }
 
@@ -25,16 +25,16 @@ export const arrayOf = dev
   : castCast;
 
 export const objectOf = dev
-  ? <T>(propPurgers: PropPurgers<T>): Purger<T> =>
+  ? <T>(propCasts: PropCasts<T>): Cast<T> =>
       (val: unknown, path: string = ""): T => {
         const cbRes = intercept((anyWarnings) => {
-          const object = purgeObject(val, path);
+          const object = castObject(val, path);
 
           if (!anyWarnings()) {
-            for (const [field, purger] of Object.entries<Purger<T[keyof T]>>(
-              propPurgers
+            for (const [field, cast] of Object.entries<Cast<T[keyof T]>>(
+              propCasts
             )) {
-              purger(object[field], `${path}.${field}`);
+              cast(object[field], `${path}.${field}`);
             }
           }
 
@@ -48,14 +48,14 @@ export const objectOf = dev
   : castCast;
 
 export const record = dev
-  ? <V>(valuePurger: Purger<V>): Purger<Record<string, V>> =>
+  ? <V>(valueCast: Cast<V>): Cast<Record<string, V>> =>
       (val: unknown, path: string = "") => {
         const cbRes = intercept((anyWarnings) => {
-          const object = purgeObject(val, path);
+          const object = castObject(val, path);
 
           if (!anyWarnings()) {
             for (const [field, value] of Object.entries(object)) {
-              valuePurger(value, `${path}.${field}`);
+              valueCast(value, `${path}.${field}`);
             }
           }
 

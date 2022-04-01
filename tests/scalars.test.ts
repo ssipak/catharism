@@ -39,13 +39,13 @@ test("value", () => {
 
 test("oneOf", () => {
   const list = [1, "2"] as const;
-  const purgeList = oneOf(list);
+  const cast = oneOf(list);
 
   for (const val of list) {
-    expect(purgeList(val)).toBe(val);
+    expect(cast(val)).toBe(val);
   }
 
   for (const val of [2, "1"]) {
-    toThrowErrorDevOnly(() => purgeList(val));
+    toThrowErrorDevOnly(() => cast(val));
   }
 });

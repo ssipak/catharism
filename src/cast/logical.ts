@@ -1,16 +1,16 @@
-import type { Purger, PurgersValues } from "../types";
+import type { Cast, CastsValues } from "../types";
 import { dev } from "../env";
 import { castCast, InterceptNoReturn } from "../utils";
 import { intercept, warn } from "../utils";
 
 export const either = dev
-  ? <P extends Purger<unknown, W>[], W = unknown>(
-        ...purgers: P
-      ): Purger<PurgersValues<P>, W> =>
+  ? <P extends Cast<unknown, W>[], W = unknown>(
+        ...casts: P
+      ): Cast<CastsValues<P>, W> =>
       (val: W, path = "") => {
         const cbRes = intercept((anyWarnings) => {
-          for (const purger of purgers) {
-            const pure = purger(val) as PurgersValues<P>;
+          for (const cast of casts) {
+            const pure = cast(val) as CastsValues<P>;
 
             if (!anyWarnings()) {
               return pure;
@@ -21,28 +21,17 @@ export const either = dev
         });
 
         if ("result" in cbRes) {
-          return cbRes.result ?? (val as PurgersValues<P>);
+          return cbRes.result ?? (val as CastsValues<P>);
         }
 
-        warn(`Value satisfies no purgers: ${cbRes.warnings.join(", ")}`, path);
-        return val as PurgersValues<P>;
+        warn(`Value can't be casted as ${cbRes.warnings.join(", ")}`, path);
+        return val as CastsValues<P>;
       }
   : castCast;
 
-// Alternatively `nullable` function could be defined as follows:
-//
-// const isNull = (v: unknown): v is null => v === null;
-// const purgeNull = (v: unknown) =>
-//   isNull(v) ? v : PurgeError.throw(`${v} is not null`);
-//
-// export const nullable = <T, W = unknown>(
-//   purger: Purger<T, W>
-// ): Purger<T | null, W> => {
-//   return either(purgeNull, purger);
-// };
 export const nullable = dev
-  ? <T, W = unknown>(purger: Purger<T, W>): Purger<T | null, W> =>
+  ? <T, W = unknown>(cast: Cast<T, W>): Cast<T | null, W> =>
       (val: W, path = "") => {
-        return val === null ? null : purger(val, path);
+        return val === null ? null : cast(val, path);
       }
   : castCast;

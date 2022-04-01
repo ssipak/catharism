@@ -1,4 +1,4 @@
-import type { ObjectKey, Purger } from "../types";
+import type { ObjectKey, Cast } from "../types";
 import { dev } from "../env";
 import {
   isBoolean,
@@ -22,7 +22,7 @@ export const boolean = dev
   ? generic(isBoolean, (val) => `«${val}» is not a boolean`)
   : cast;
 
-type ExactlyCombinator = <T>(sample: T) => Purger<typeof sample>;
+type ExactlyCombinator = <T>(sample: T) => Cast<typeof sample>;
 export const exactly: ExactlyCombinator = dev
   ? (sample) =>
       generic(
@@ -33,7 +33,7 @@ export const exactly: ExactlyCombinator = dev
 
 type OneOfCombinator = <T extends ObjectKey>(
   list: readonly T[]
-) => Purger<typeof list[number]>;
+) => Cast<typeof list[number]>;
 export const oneOf: OneOfCombinator = dev
   ? (list) => generic(isOneOf(list))
   : castCast;

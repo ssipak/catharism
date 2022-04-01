@@ -14,7 +14,7 @@ interface Animal {
 }
 
 test("arrayOf objectOf", () => {
-  const purger = arrayOf(
+  const cast = arrayOf(
     objectOf({
       species: oneOf(["mouse", "cat", "dog", "bird"]),
       name: string,
@@ -51,14 +51,14 @@ test("arrayOf objectOf", () => {
   ];
 
   for (const val of erronousList) {
-    toThrowErrorDevOnly(() => purger(val));
+    toThrowErrorDevOnly(() => cast(val));
   }
 
-  expect(purger(correctVal)).toBe(correctVal);
+  expect(cast(correctVal)).toBe(correctVal);
 });
 
 test("record", () => {
-  const purger = record(either(string, number));
+  const cast = record(either(string, number));
 
   const erronousList = [
     undefined,
@@ -73,12 +73,12 @@ test("record", () => {
   ];
 
   for (const val of erronousList) {
-    toThrowErrorDevOnly(() => purger(val));
+    toThrowErrorDevOnly(() => cast(val));
   }
 
   const correctlist = [{ a: 1, b: "string" }, new A(), {}, []];
 
   for (const val of correctlist) {
-    expect(purger(val)).toBe(val);
+    expect(cast(val)).toBe(val);
   }
 });

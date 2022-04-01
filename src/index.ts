@@ -1,3 +1,5 @@
+export type { Guard, Cast, Logger } from "./types";
+
 export {
   isBoolean,
   isNumber,
