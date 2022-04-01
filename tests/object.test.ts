@@ -1,5 +1,5 @@
 import { toThrowErrorDevOnly } from "./bootstrap";
-import { object, array } from "../src/purgers/object";
+import { object, array } from "../src/cast/object";
 
 class A {
   prop = "cool";

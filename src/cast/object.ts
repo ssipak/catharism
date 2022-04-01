@@ -1,6 +1,6 @@
 import { dev } from "../env";
 import { generic } from "./generic";
-import { isArray, isObject } from "../guards/object";
+import { isArray, isObject } from "../guard/object";
 import { cast } from "../utils";
 
 export const object = dev

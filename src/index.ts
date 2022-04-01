@@ -4,14 +4,14 @@ export {
   isString,
   isExactly,
   isOneOf,
-} from "./guards/scalars";
-export { isObject, isArray, isDateLike } from "./guards/object";
-export { isObjectOf, isRecord, isArrayOf } from "./guards/compounds";
+} from "./guard/scalars";
+export { isObject, isArray, isDateLike } from "./guard/object";
+export { isObjectOf, isRecord, isArrayOf } from "./guard/compounds";
 
-export { generic } from "./purgers/generic";
-export { boolean, number, string, exactly, oneOf } from "./purgers/scalars";
-export { object, array } from "./purgers/object";
-export { objectOf, record, arrayOf } from "./purgers/compounds";
-export { either, nullable } from "./purgers/logical";
+export { generic } from "./cast/generic";
+export { boolean, number, string, exactly, oneOf } from "./cast/scalars";
+export { object, array } from "./cast/object";
+export { objectOf, record, arrayOf } from "./cast/compounds";
+export { either, nullable } from "./cast/logical";
 
 export { pushLogger, popLogger } from "./utils";

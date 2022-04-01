@@ -1,7 +1,7 @@
 import { toThrowErrorDevOnly } from "./bootstrap";
-import { number, oneOf, string } from "../src/purgers/scalars";
-import { objectOf, arrayOf, record } from "../src/purgers/compounds";
-import { either } from "../src/purgers/logical";
+import { number, oneOf, string } from "../src/cast/scalars";
+import { objectOf, arrayOf, record } from "../src/cast/compounds";
+import { either } from "../src/cast/logical";
 
 class A {
   prop = "cool";

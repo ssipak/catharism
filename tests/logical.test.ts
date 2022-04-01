@@ -1,8 +1,8 @@
 import { toThrowErrorDevOnly } from "./bootstrap";
-import { nullable } from "../src/purgers/logical";
-import { either } from "../src/purgers/logical";
-import { number } from "../src/purgers/scalars";
-import { array } from "../src/purgers/object";
+import { nullable } from "../src/cast/logical";
+import { either } from "../src/cast/logical";
+import { number } from "../src/cast/scalars";
+import { array } from "../src/cast/object";
 
 class A {
   prop = "cool";

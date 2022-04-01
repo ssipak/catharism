@@ -5,7 +5,7 @@ import {
   oneOf,
   string,
   exactly,
-} from "../src/purgers/scalars";
+} from "../src/cast/scalars";
 
 test("number", () => {
   for (const val of [undefined, null, "1", 1n, {}, true]) {

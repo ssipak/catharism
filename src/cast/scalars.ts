@@ -6,7 +6,7 @@ import {
   isNumber,
   isOneOf,
   isString,
-} from "../guards/scalars";
+} from "../guard/scalars";
 import { generic } from "./generic";
 import { cast, castCast } from "../utils";
 
