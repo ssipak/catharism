@@ -16,7 +16,7 @@ export const InterceptNoReturn = Symbol("intercept-no-return");
 
 export function intercept<R>(
   cb: (anyWarnings: () => boolean) => R | typeof InterceptNoReturn
-): { result?: R; warnings: string[] } {
+): { result: R; warnings: string[] } | { warnings: string[] } {
   const warnings = [] as string[];
   let lastCount = 0;
 
@@ -32,7 +32,7 @@ export function intercept<R>(
 
   try {
     const result = cb(anyWarnings);
-    return result !== InterceptNoReturn ? { result, warnings } : { warnings };
+    return result === InterceptNoReturn ? { warnings } : { result, warnings };
   } finally {
     popLogger();
   }

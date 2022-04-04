@@ -1,5 +1,5 @@
 {
-  "version": "0.0.0",
+  "version": "0.0.1",
   "name": "catharism",
   "type": "module",
   "main": "./dist/index.js",
@@ -16,15 +16,12 @@
   },
   "scripts": {
     "prepublishOnly": "npm i && npm run build && npm test",
-
     "build": "npm run build:lib",
     "build:lib": "npx rimraf dist && npm run rollup",
-
     "test": "npm run test:dev && npm run test:prod",
     "test:dev": "cross-env NODE_ENV=development npm run jest",
     "test:prod": "cross-env NODE_ENV=production npm run jest",
-
-    "jest": "npm run nwj -- ./node_modules/.bin/jest",
+    "jest": "npm run nwj -- ./node_modules/.bin/jest -t $npm_config_t",
     "rollup": "npm run nwj -- ./node_modules/.bin/rollup -c",
     "nwj": "node --experimental-json-modules"
   },

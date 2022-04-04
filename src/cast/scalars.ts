@@ -9,31 +9,26 @@ import {
 } from "../guard/scalars";
 import { generic } from "./generic";
 import { cast, castCast } from "../utils";
+import {
+  booleanMsg,
+  exactlyMsg,
+  numberMsg,
+  oneOfMsg,
+  stringMsg,
+} from "../messages/scalars";
 
-export const number = dev
-  ? generic(isNumber, (val) => `«${val}» is not a number`)
-  : cast;
-
-export const string = dev
-  ? generic(isString, (val) => `«${val}» is not a string`)
-  : cast;
-
-export const boolean = dev
-  ? generic(isBoolean, (val) => `«${val}» is not a boolean`)
-  : cast;
+export const number = dev ? generic(isNumber, numberMsg) : cast;
+export const string = dev ? generic(isString, stringMsg) : cast;
+export const boolean = dev ? generic(isBoolean, booleanMsg) : cast;
 
 type ExactlyCombinator = <T>(sample: T) => Cast<typeof sample>;
 export const exactly: ExactlyCombinator = dev
-  ? (sample) =>
-      generic(
-        isExactly(sample),
-        (val) => `«${val}» doesn't exactly match «${sample}»`
-      )
+  ? (sample) => generic(isExactly(sample), exactlyMsg(sample))
   : castCast;
 
 type OneOfCombinator = <T extends ObjectKey>(
   list: readonly T[]
 ) => Cast<typeof list[number]>;
 export const oneOf: OneOfCombinator = dev
-  ? (list) => generic(isOneOf(list))
+  ? (list) => generic(isOneOf(list), oneOfMsg(list))
   : castCast;

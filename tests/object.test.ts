@@ -14,7 +14,7 @@ test("object", () => {
   }
 
   for (const val of validValues) {
-    expect(object(val)).toBe(val);
+    expect(object(val)).toEqual(val);
   }
 });
 
@@ -35,6 +35,6 @@ test("array", () => {
   }
 
   for (const val of [[], [{ a: 1, b: "string" }, new A()]]) {
-    expect(array(val)).toBe(val);
+    expect(array(val)).toEqual(val);
   }
 });

@@ -16,4 +16,7 @@ export { object, array } from "./cast/object";
 export { objectOf, record, arrayOf } from "./cast/compounds";
 export { either, nullable } from "./cast/logical";
 
+export { toDate } from "./convert/scalars";
+export { toObjectOf, toArrayOf, toRecord } from "./convert/compounds";
+
 export { pushLogger, popLogger } from "./utils";

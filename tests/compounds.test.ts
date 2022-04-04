@@ -79,6 +79,6 @@ test("record", () => {
   const correctlist = [{ a: 1, b: "string" }, new A(), {}, []];
 
   for (const val of correctlist) {
-    expect(cast(val)).toBe(val);
+    expect(cast(val)).toEqual(val);
   }
 });

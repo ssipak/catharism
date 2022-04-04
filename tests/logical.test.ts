@@ -20,7 +20,7 @@ test("either", () => {
   }
 
   for (const val of [1, []]) {
-    expect(numberOrArray(val)).toBe(val);
+    expect(numberOrArray(val)).toEqual(val);
   }
 });
 
@@ -32,6 +32,6 @@ test("nullable", () => {
   }
 
   for (const val of [null, []]) {
-    expect(nullableArray(val)).toBe(val);
+    expect(nullableArray(val)).toEqual(val);
   }
 });
