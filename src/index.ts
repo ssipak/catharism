@@ -18,5 +18,6 @@ export { either, nullable } from "./cast/logical";
 
 export { toDate } from "./convert/scalars";
 export { toObjectOf, toArrayOf, toRecord } from "./convert/compounds";
+export { toEither, toNullable } from "./convert/logical";
 
-export { pushLogger, popLogger } from "./utils";
+export { warn, pushLogger, popLogger } from "./utils";

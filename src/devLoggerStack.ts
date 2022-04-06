@@ -3,7 +3,7 @@ import { dev } from "./env";
 
 const loggers: Logger[] = dev ? [console.warn.bind(console)] : [];
 
-export function warn<T>(message: string, path: string) {
+export function warn(message: string, path: string) {
   if (path) {
     message = `${path}: ${message}`;
   }
