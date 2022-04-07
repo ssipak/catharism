@@ -4,16 +4,20 @@ import { isNumber, isString } from "../guard/scalars";
 import { toDateMsg } from "./../messages/scalars";
 
 export function toDate(data: unknown, path: string = ""): Date {
-  if (isString(data) || isNumber(data)) {
-    const date = new Date(data);
+  let date: Date | undefined;
+  if (isString(data)) {
+    date = new Date(data);
+  } else if (isNumber(data)) {
+    date = new Date(data * 1000);
+  }
 
-    if (!isNaN(date.getTime())) {
-      return date;
+  if (!date || isNaN(date.getTime())) {
+    if (dev) {
+      warn(toDateMsg(data), path);
     }
+
+    return data as Date;
   }
-  
-  if (dev) {
-    warn(toDateMsg(data), path);
-  }
-  return data as Date;
+
+  return date;
 }

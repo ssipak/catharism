@@ -19,20 +19,20 @@ import { toDate } from "../src/convert/scalars";
 //   return float;
 // };
 
-test("toArrayOf number", () => {
+test("toArrayOf toObjectOf toDate", () => {
   type Student = { name: string; age: number; admittedAt: Date };
 
   const input = [
     { name: "Sasha", age: 20, admittedAt: "2004-01-01" },
-    { name: "Zhenya", age: 35, admittedAt: "2012-12-01" },
+    { name: "Zhenya", age: 35, admittedAt: 1649324377.192 },
   ];
 
   const output: Student[] = [
     { name: "Sasha", age: 20, admittedAt: new Date("2004-01-01") },
-    { name: "Zhenya", age: 35, admittedAt: new Date("2012-12-01") },
+    { name: "Zhenya", age: 35, admittedAt: new Date("2022-04-07T09:39:37.192Z") },
   ];
 
-  const cast: Cast<Student[]> = toArrayOf(
+  const convert: Cast<Student[]> = toArrayOf(
     toObjectOf({
       name: string,
       age: number,
@@ -40,5 +40,5 @@ test("toArrayOf number", () => {
     })
   );
 
-  expect(cast(input)).toEqual(output);
+  expect(convert(input)).toEqual(output);
 });
