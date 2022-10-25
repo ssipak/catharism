@@ -9,6 +9,7 @@ export {
 } from "./guard/scalars";
 export { isObject, isArray, isDateLike } from "./guard/object";
 export { isObjectOf, isRecord, isArrayOf } from "./guard/compounds";
+export { isEither, isNullable } from "./guard/logical";
 
 export { generic } from "./cast/generic";
 export { boolean, number, string, exactly, oneOf } from "./cast/scalars";

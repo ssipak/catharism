@@ -10,7 +10,7 @@ import dts from 'rollup-plugin-dts'
 import del from 'rollup-plugin-delete'
 import bundleSize from 'rollup-plugin-bundle-size'
 
-import pkg from './package.json'
+import pkg from './package.json' assert { type: 'json' }
 
 
 // @ts-ignore

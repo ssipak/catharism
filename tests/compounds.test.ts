@@ -3,6 +3,7 @@ import { number, oneOf, string } from "../src/cast/scalars";
 import { objectOf, arrayOf, record } from "../src/cast/compounds";
 import { either } from "../src/cast/logical";
 
+// noinspection JSUnusedGlobalSymbols
 class A {
   prop = "cool";
 }
@@ -22,7 +23,7 @@ test("arrayOf objectOf", () => {
     })
   );
 
-  const erronousList = [
+  const erroneousList = [
     undefined,
     null,
     "string",
@@ -50,7 +51,7 @@ test("arrayOf objectOf", () => {
     },
   ];
 
-  for (const val of erronousList) {
+  for (const val of erroneousList) {
     toThrowErrorDevOnly(() => cast(val));
   }
 
@@ -60,7 +61,7 @@ test("arrayOf objectOf", () => {
 test("record", () => {
   const cast = record(either(string, number));
 
-  const erronousList = [
+  const erroneousList = [
     undefined,
     null,
     "string",
@@ -72,13 +73,13 @@ test("record", () => {
     [{ a: 1, b: "string" }, new A()],
   ];
 
-  for (const val of erronousList) {
+  for (const val of erroneousList) {
     toThrowErrorDevOnly(() => cast(val));
   }
 
-  const correctlist = [{ a: 1, b: "string" }, new A(), {}, []];
+  const correctList = [{ a: 1, b: "string" }, new A(), {}, []];
 
-  for (const val of correctlist) {
+  for (const val of correctList) {
     expect(cast(val)).toEqual(val);
   }
 });
