@@ -2,7 +2,7 @@ import type { Cast, PropCasts } from "../types";
 import { dev } from "../env";
 import { warn } from "../utils";
 import { isArray, isObject } from "../guard/object";
-import { arrayMsg, objectMsg } from "./../messages/object";
+import { arrayMsg, objectMsg } from "../messages/object";
 
 export const toArrayOf =
   <T>(cast: Cast<T>): Cast<T[]> =>

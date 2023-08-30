@@ -20,7 +20,7 @@ export function isObjectOf<T>(propGuards: PropGuards<T>) {
     }
 
     for (const [prop, guard] of Object.entries<Guard<T[keyof T]>>(propGuards)) {
-      if (guard(val[prop])) {
+      if (!guard(val[prop])) {
         return false;
       }
     }

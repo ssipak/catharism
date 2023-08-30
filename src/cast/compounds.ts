@@ -1,4 +1,4 @@
-import { toRecord } from "./../convert/compounds";
+import { toRecord } from "../convert/compounds";
 import { toArrayOf, toObjectOf } from "../convert/compounds";
 import { dev } from "../env";
 import { castCast } from "../utils";
